@@ -11,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.dep11.pos.tm.Customer;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,7 +23,7 @@ public class ManageCustomerFormController {
     public JFXTextField txtCustomerAddress;
     public JFXButton btnSave;
     public JFXButton btnDelete;
-    public TableView tblCustomers;
+    public TableView<Customer> tblCustomers;
 
     public void navigateToHome(MouseEvent mouseEvent) throws IOException {
         URL resource = this.getClass().getResource("/view/MainForm.fxml");
