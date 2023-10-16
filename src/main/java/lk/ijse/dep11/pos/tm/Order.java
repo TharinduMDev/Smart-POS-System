@@ -1,4 +1,4 @@
-package lk.ijse.dep11.pos.db;
+package lk.ijse.dep11.pos.tm;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
