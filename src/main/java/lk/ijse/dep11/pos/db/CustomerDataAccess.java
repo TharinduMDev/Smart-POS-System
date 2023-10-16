@@ -15,6 +15,8 @@ public class CustomerDataAccess {
     static final PreparedStatement STM_INSERT_CUSTOMERS;
     static final PreparedStatement STM_UPDATE_CUSTOMERS;
     static final PreparedStatement STM_DELETE_CUSTOMER;
+    static final PreparedStatement STM_GET_LAST_CUSTOMER_ID;
+
 
 
     static {
@@ -24,6 +26,7 @@ public class CustomerDataAccess {
             STM_INSERT_CUSTOMERS = connection.prepareStatement("INSERT INTO customer (id, name, address) values (?,?,?)");
             STM_UPDATE_CUSTOMERS =connection.prepareStatement("UPDATE customer SET name=?,address=? WHERE id=?");
             STM_DELETE_CUSTOMER = connection.prepareStatement("DELETE FROM customer WHERE id=?");
+            STM_GET_LAST_CUSTOMER_ID = connection.prepareStatement("SELECT id FROM customer ORDER BY id DESC FETCH FIRST ROWS ONLY");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -57,11 +60,11 @@ public class CustomerDataAccess {
             throw new RuntimeException(e);
         }
     }
-    public static void updateCustomer(String customerId,String name,String address){
+    public static void updateCustomer(Customer updateCustomer){
         try {
-            STM_UPDATE_CUSTOMERS.setString(1, name);
-            STM_UPDATE_CUSTOMERS.setString(2, address);
-            STM_UPDATE_CUSTOMERS.setString(3, customerId);
+            STM_UPDATE_CUSTOMERS.setString(1, updateCustomer.getId());
+            STM_UPDATE_CUSTOMERS.setString(2, updateCustomer.getName());
+            STM_UPDATE_CUSTOMERS.setString(3, updateCustomer.getAddress());
             STM_UPDATE_CUSTOMERS.executeUpdate();
 
         } catch (SQLException e) {
@@ -72,8 +75,21 @@ public class CustomerDataAccess {
     public static void deleteCustomer(String customerId){
         try {
             STM_DELETE_CUSTOMER.setString(1,customerId);
+            STM_DELETE_CUSTOMER.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    public static String getLastCustomerId(){
+
+        try {
+            ResultSet resultSet = STM_GET_LAST_CUSTOMER_ID.executeQuery();
+            if(resultSet.next()){
+               return(resultSet.getString("id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

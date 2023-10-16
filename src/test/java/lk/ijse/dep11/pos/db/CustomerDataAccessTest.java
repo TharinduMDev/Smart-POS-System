@@ -50,7 +50,7 @@ class CustomerDataAccessTest {
             CustomerDataAccess.saveCustomer(new Customer("123","kasun","galle"));
             CustomerDataAccess.saveCustomer(new Customer("345","Ruwan","colombo"));
         assertDoesNotThrow(()->{
-            CustomerDataAccess.updateCustomer("123","kamal","kandy");
+            CustomerDataAccess.updateCustomer(new Customer("123","kamal","kandy"));
         });
     }
 
