@@ -30,4 +30,8 @@ public class SearchOrdersFormController {
         primaryStage.centerOnScreen();
         Platform.runLater(primaryStage::sizeToScene);
     }
+    public void imitialize(){
+        
+    }
+
 }

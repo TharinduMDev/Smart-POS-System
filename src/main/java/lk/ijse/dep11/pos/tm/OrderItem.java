@@ -6,14 +6,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.function.BiConsumer;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
+public class OrderItem {
     private String code;
     private String description;
     private int qty;
     private BigDecimal unitPrice;
     private JFXButton btnDelete;
+
+    public BigDecimal getTotal() {
+        return unitPrice.multiply(new BigDecimal(qty)).setScale(2);
+    }
+
 }

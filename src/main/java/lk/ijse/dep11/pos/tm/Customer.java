@@ -5,12 +5,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.annotation.processing.SupportedAnnotationTypes;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer {
+public class Customer implements Serializable {
     private String id;
     private String name;
     private String address;
+
+    @Override
+    public String toString() {
+        return id;
+    }
 }
